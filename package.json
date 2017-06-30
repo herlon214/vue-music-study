@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Study music theory",
   "author": "Herlon Aguiar <herlon214@gmail.com>",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "node build/dev-server.js",
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "build": "node build/build.js",
     "lint": "eslint --ext .js,.vue src"
   },
