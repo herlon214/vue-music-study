@@ -10,6 +10,10 @@
             Wrong: {{ wrong_answers_count }}
           </span>
         </div>
+        <div v-if="plays > 0">
+          <small>Time average of each answer: <strong>{{ time_avg }}</strong>s</small> <br>
+        </div>
+
         <div v-if="waiting">
           <a class="button is-warning is-medium" v-on:click="start">start game</a>
         </div>
@@ -79,11 +83,14 @@ export default {
       result_answer: false,
       right_answers_count: 0,
       wrong_answers_count: 0,
+      time_avg: 0,
       plays: 0,
       time: 0,
+      answer_time: 0,
       scale_chosen: '',
       note_chosen: 0,
       user_answer: '',
+      avgInterval: {},
       notes: notes
     }
   },
@@ -105,10 +112,15 @@ export default {
           this.scale_chosen = question.scale_chosen
           this.note_chosen = question.note_chosen
           this.playing = true
+          this.avgInterval = setInterval(() => {
+            this.answer_time = this.answer_time + 1
+          }, 1000)
         }
       }, 1000)
     },
     check_answer () {
+      clearInterval(this.avgInterval)
+
       if (this.user_answer.toLowerCase() === notes[this.scale_chosen][this.note_chosen]) {
         this.result_answer = true
         this.right_answers_count++
@@ -120,6 +132,7 @@ export default {
       this.plays++
       this.result = true
       this.playing = false
+      this.time_avg = (this.time_avg + this.answer_time) / this.plays
 
       setTimeout(() => {
         this.start()
