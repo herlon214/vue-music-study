@@ -42,7 +42,7 @@
 
           <div class="notification is-success" v-if="result_answer">
             <button class="delete"></button>
-            Yes!! <s>{{ notes[scale_chosen][note_chosen].toUpperCase() }}</s> really is the right note, let's try another one...
+            Yes!! <u>{{ notes[scale_chosen][note_chosen].toUpperCase() }}</u> really is the right note, let's try another one...
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export default {
       }, 1000)
     },
     check_answer () {
-      if (this.user_answer === notes[this.scale_chosen][this.note_chosen]) {
+      if (this.user_answer.toLowerCase() === notes[this.scale_chosen][this.note_chosen]) {
         this.result_answer = true
         this.right_answers_count++
       } else {
