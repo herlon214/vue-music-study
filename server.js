@@ -5,11 +5,11 @@ var serveStatic = require('serve-static');
 app = express();
 app.use(serveStatic(__dirname + '/dist'));
 
-app.get('/', function(req, res) {
+app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 8080;
 app.listen(port);
 
 console.log('server started '+ port);
