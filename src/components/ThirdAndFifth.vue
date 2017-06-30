@@ -11,7 +11,7 @@
           </span>
         </div>
         <div v-if="plays > 0">
-          <small>Time average of each answer: <strong>{{ time_avg }}</strong>s</small> <br>
+          <small>Time average of each answer: <strong>{{ time_avg.toFixed(2) }}</strong>s</small> <br>
         </div>
 
         <div v-if="waiting">
@@ -22,8 +22,8 @@
         </div>
 
         <div v-if="playing">
-          <h2 class="title is-2">{{ scale_chosen.toUpperCase() }}</h2>
-          <p>What's the <strong>{{ note_chosen }}{{ note_chosen === 5 ? 'th' : 'rd'}}</strong> note in the <strong>{{ scale_chosen.toUpperCase() }}</strong> scale?</p>
+          <h2 class="title is-2">{{ scale_chosen }}</h2>
+          <p>What's the <strong>{{ note_chosen }}{{ note_chosen === 5 ? 'th' : 'rd'}}</strong> note in the <strong>{{ scale_chosen }}</strong> scale?</p>
 
           <br>
           <div class="column">
@@ -61,7 +61,7 @@
 <script>
 const notes = require('../lib/notes')
 const getQuestion = () => {
-  let scale = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+  let scale = ['C', 'Cm', 'D', 'Dm', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'A', 'Am', 'B', 'Bm']
   let scaleChosen = scale[Math.floor(Math.random() * 7)]
   let noteChosen = Math.floor(Math.random() * 2) === 1 ? 3 : 5
 
@@ -121,7 +121,7 @@ export default {
     check_answer () {
       clearInterval(this.avgInterval)
 
-      if (this.user_answer.toLowerCase() === notes[this.scale_chosen][this.note_chosen]) {
+      if (this.user_answer.toLowerCase() === this.notes[this.scale_chosen][this.note_chosen]) {
         this.result_answer = true
         this.right_answers_count++
       } else {
