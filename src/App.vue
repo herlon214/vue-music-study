@@ -7,6 +7,7 @@
         <router-link to="/third-and-fifth" class="button is-primary is-outlined">third and fifth notes of a scale</router-link>
         <br><br>
         <router-view></router-view>
+        <br><small>made with ❤ by <strong>Herlon Aguiar</strong></small>
       </div>
     </div>
 
